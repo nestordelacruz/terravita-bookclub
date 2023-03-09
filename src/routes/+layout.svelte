@@ -6,7 +6,7 @@
 </script>
 
 <!-- App Shell -->
-<AppShell>
+<AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
 		<AppBar>
@@ -39,8 +39,10 @@
 					GitHub
 				</a>
 			</svelte:fragment>
+			
 		</AppBar>
 	</svelte:fragment>
+
 	<!-- Page Route Content -->
 	<slot />
 </AppShell>
