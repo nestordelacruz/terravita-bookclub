@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:0NehJCQSWQ7dLVRe@db.hfslsfboqmcjmlnnrdol.supabase.co:5432/postgres"
+}
+
+model Books {
+  id               BigInt        @id @default(autoincrement())
+  created_at       DateTime?     @default(now()) @db.Timestamptz(6)
+  ISBN             Int?          @db.SmallInt
+  author           String?       @db.VarChar
+  title            String?       @db.VarChar
+  publication_date DateTime?     @db.Date
+  series           String?       @db.VarChar
+  owned_books      owned_books[]
+}
+
+model Users {
+  id                                BigInt        @id @unique @default(autoincrement())
+  created_at                        DateTime?     @default(now()) @db.Timestamptz(6)
+  email                             String?       @unique @db.VarChar
+  phone                             Int?          @unique @db.SmallInt
+  first_name                        String?       @default("") @db.VarChar
+  last_name                         String?       @default("") @db.VarChar
+  username                          String        @default("") @db.VarChar
+  password                          String        @default("")
+  exchanges_exchanges_user_aToUsers exchanges[]   @relation("exchanges_user_aToUsers")
+  exchanges_exchanges_user_bToUsers exchanges[]   @relation("exchanges_user_bToUsers")
+  owned_books                       owned_books[]
+}
+
+model exchanges {
+  id                            BigInt    @id @unique @default(autoincrement())
+  created_at                    DateTime? @default(now()) @db.Timestamptz(6)
+  user_a                        BigInt?
+  user_b                        BigInt?
+  status                        Boolean?
+  end_time                      DateTime? @db.Timestamptz(6)
+  book_a                        BigInt?
+  book_b                        BigInt?
+  Users_exchanges_user_aToUsers Users?    @relation("exchanges_user_aToUsers", fields: [user_a], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Users_exchanges_user_bToUsers Users?    @relation("exchanges_user_bToUsers", fields: [user_b], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model owned_books {
+  id          BigInt    @id @unique @default(autoincrement())
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  ISBN        Int?      @db.SmallInt
+  instance_of BigInt?
+  owner_id    BigInt?
+  Books       Books?    @relation(fields: [instance_of], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Users       Users?    @relation(fields: [owner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
