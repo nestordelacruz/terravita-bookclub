@@ -1,5 +1,5 @@
 <script>
-	import '@skeletonlabs/skeleton/themes/theme-vintage.css';
+	import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
 	import '@skeletonlabs/skeleton/styles/all.css';
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
@@ -11,7 +11,7 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Terravita</strong>
+				<a href="./" target="_blank" class="text-xl uppercase">Terravita</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a
@@ -39,7 +39,6 @@
 					GitHub
 				</a>
 			</svelte:fragment>
-			
 		</AppBar>
 	</svelte:fragment>
 
