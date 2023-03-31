@@ -8,6 +8,10 @@
 		<div class="card p-4 flex-auto">
 			<h1>{book.title}</h1>
 			<img src={book.book_image} alt={book.title} />
+
+			<button type="button" class="btn-icon variant-ghost"> Wishlist</button>
+			<!-- BUTTON SUPPOSED TO ADD THIS BOOK TO YOUR WISHLIST -->
 		</div>
 	{/each}
 </div>
+
